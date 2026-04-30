@@ -67,7 +67,7 @@ To implement the QR code system for order verification, you need to bridge the g
 Once the customer places an order, use a library like `qrcode.react` (React) or `qrcode.js` (Vanilla JS) to generate the code.
 * **Data to Encode:** Use a string containing the Order ID.
 * **Example Code (JavaScript):**
-    ```
+    ```javascript
          // Example Order ID
          const orderId = "ORD-99283-X";
 

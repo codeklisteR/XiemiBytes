@@ -13,14 +13,14 @@ FOR FRONTEND IMPROVEMENT:
 System Improvement Plan: Customer & Admin Portals
 
 Customer Side: UI & UX Refinement
-Orders Page Layout:
-    * Group orders by status (Pending, In Progress, Completed).
+* **Orders Page Layout:**
+    * Group orders by status (Pending, Preparing, Completed).
     * Use **Cards** instead of a simple list to show item previews, total price, and order date at a glance.
-Registration Form Alignment:**
+* **Registration Form Alignment:**
     * Center the form container or use a grid system to fix "lopsided" labels.
-Auth Cleanup:
+* **Auth Cleanup:**
     * **Action:** Remove the "Login as Admin" button from the public login page.
-
+    * *Tip:* Admins should use a hidden route (e.g., `/admin-portal`) to keep the customer UI focused.
 
 
 Admin Side: Dashboard & Management

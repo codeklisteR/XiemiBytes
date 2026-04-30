@@ -68,18 +68,18 @@ Once the customer places an order, use a library like `qrcode.react` (React) or 
 * **Data to Encode:** Use a string containing the Order ID.
 * **Example Code (JavaScript):**
     ```
-// Example Order ID
-const orderId = "ORD-99283-X";
+         // Example Order ID
+         const orderId = "ORD-99283-X";
 
-// Initialize the QR Code
-const qrcode = new QRCode(document.getElementById("qrcode-container"), {
-    text: orderId,         // The data to encode
-    width: 256,            // Width of the QR code
-    height: 256,           // Height of the QR code
-    colorDark : "#000000", // Foreground color
-    colorLight : "#ffffff",// Background color
-    correctLevel : QRCode.CorrectLevel.H // Error correction level
-});
+         // Initialize the QR Code
+         const qrcode = new QRCode(document.getElementById("qrcode-container"), {
+             text: orderId,         // The data to encode
+             width: 256,            // Width of the QR code
+             height: 256,           // Height of the QR code
+             colorDark : "#000000", // Foreground color
+             colorLight : "#ffffff",// Background color
+             correctLevel : QRCode.CorrectLevel.H // Error correction level
+         });
     ```
 
 ### B. Verification (Admin Side)

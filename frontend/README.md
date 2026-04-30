@@ -66,18 +66,20 @@ To implement the QR code system for order verification, you need to bridge the g
 ### A. Generation (Customer Side)
 Once the customer places an order, use a library like `qrcode.react` (React) or `qrcode.js` (Vanilla JS) to generate the code.
 * **Data to Encode:** Use a string containing the Order ID.
-* **Example Code (React):**
+* **Example Code (JavaScript):**
     ```javascript
-    import QRCode from 'qrcode.react';
+// Example Order ID
+const orderId = "ORD-99283-X";
 
-    const OrderSuccess = ({ orderId }) => {
-      return (
-        <div>
-          <h3>Show this to the counter:</h3>
-          <QRCode value={orderId} size={256} />
-        </div>
-      );
-    }
+// Initialize the QR Code
+const qrcode = new QRCode(document.getElementById("qrcode-container"), {
+    text: orderId,         // The data to encode
+    width: 256,            // Width of the QR code
+    height: 256,           // Height of the QR code
+    colorDark : "#000000", // Foreground color
+    colorLight : "#ffffff",// Background color
+    correctLevel : QRCode.CorrectLevel.H // Error correction level
+});
     ```
 
 ### B. Verification (Admin Side)

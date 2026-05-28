@@ -12,9 +12,15 @@ if (!$id) {
 
 $stmt = $pdo->prepare("
     SELECT 
-      p.*,
+      p.product_id,
+      p.prod_name,
+      p.prod_qty,
+      p.unit_price,
+      p.prod_active,
+      COALESCE(c.categ_name, p.prod_categ) AS prod_categ,
       MIN(pv.var_img) AS var_img
     FROM product p
+    LEFT JOIN category c ON (p.prod_categ = CAST(c.categ_id AS CHAR) OR p.prod_categ = c.categ_name)
     LEFT JOIN product_var pv ON pv.product_id = p.product_id
     WHERE p.product_id = ?
     GROUP BY p.product_id

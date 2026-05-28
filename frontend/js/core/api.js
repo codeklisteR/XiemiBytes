@@ -41,9 +41,10 @@ class APIClient {
             signal: AbortSignal.timeout(this.timeout),
         };
 
-        if (data !== null && data !== undefined && ['POST', 'PUT', 'PATCH'].includes(method)) {
-                config.body = JSON.stringify(data);
-            }
+        // Include body for POST, PUT, PATCH, and DELETE (when data is provided)
+        if (data !== null && data !== undefined && ['POST', 'PUT', 'PATCH', 'DELETE'].includes(method)) {
+            config.body = JSON.stringify(data);
+        }
 
         Utils.log(`${method} ${endpoint}`);
 

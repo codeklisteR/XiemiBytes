@@ -25,22 +25,19 @@ try {
         }
     }
 
-    // Handle category filters
-    if (is_numeric($category) && $category !== '') {
-        $categoryIndex = (int)$category - 1;
-        $catStmt = $pdo->query("SELECT DISTINCT prod_categ FROM product");
-        $allCats = $catStmt->fetchAll(PDO::FETCH_COLUMN);
-        if (isset($allCats[$categoryIndex])) {
-            $category = $allCats[$categoryIndex];
-        }
-    }
-
     // Get products and merge duplicates
     $sql = "
         SELECT 
-          p.*,
+          p.product_id,
+          p.prod_name,
+          p.prod_qty,
+          p.unit_price,
+          p.prod_active,
+          COALESCE(c.categ_name, p.prod_categ) AS prod_categ,
           MIN(pv.var_img) AS var_img
         FROM product p
+        LEFT JOIN category c 
+          ON (p.prod_categ = CAST(c.categ_id AS CHAR) OR p.prod_categ = c.categ_name)
         LEFT JOIN product_var pv 
           ON pv.product_id = p.product_id
         WHERE p.prod_active = 1
@@ -49,7 +46,7 @@ try {
     $params = [];
 
     if ($category !== '' && $category !== null) {
-        $sql .= " AND p.prod_categ = :category";
+        $sql .= " AND (p.prod_categ = :category OR c.categ_name = :category OR CAST(c.categ_id AS CHAR) = :category)";
         $params[':category'] = $category;
     }
 

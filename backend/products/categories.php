@@ -4,18 +4,9 @@ require_once dirname(__DIR__) . '/database.php';
 header('Content-Type: application/json');
 
 try {
-    $stmt = $pdo->query("SELECT DISTINCT prod_categ FROM product");
-    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    $categories = [];
-    foreach ($rows as $row) {
-        if (!empty($row['prod_categ'])) {
-            $categories[] = [
-                'id' => $row['prod_categ'],
-                'name' => $row['prod_categ']
-            ];
-        }
-    }
+    // Get categories from the category table
+    $stmt = $pdo->query("SELECT categ_id as id, categ_name as name FROM category WHERE categ_active = 1 ORDER BY categ_name ASC");
+    $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     echo json_encode([
         'status' => 'success',

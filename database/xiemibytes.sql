@@ -3,16 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 23, 2026 at 07:18 PM
+-- Generation Time: May 26, 2026 at 01:18 PM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
-
-SET FOREIGN_KEY_CHECKS = 0;
-
-CREATE DATABASE IF NOT EXISTS xiemibytes
-CHARACTER SET utf8mb4
-COLLATE utf8mb4_general_ci;
-USE xiemibytes;
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -90,7 +83,10 @@ INSERT INTO `category` (`categ_id`, `categ_name`, `categ_active`) VALUES
 (4, 'Fruit Series', 1),
 (5, 'Milk Tea', 1),
 (6, 'Fruit Tea', 1),
-(15, 'Pearl Shake', 1);
+(15, 'Pearl Shake', 1),
+(16, 'Cheesecakes', 1),
+(17, 'Cream Cheese', 1),
+(18, 'Lemonade', 1);
 
 -- --------------------------------------------------------
 
@@ -123,7 +119,7 @@ INSERT INTO `customers` (`cust_id`, `username`, `cust_phone`, `cust_email`, `cus
 (8, 'Hannah Abbott', '09174595008', 'hannah.abbott@mail.com', 'password123', 140, 1),
 (9, 'Ian Malcolm', '09179967864', 'ian.malcolm@mail.com', 'password123', 120, 1),
 (10, 'Julia Roberts', '09178663049', 'julia.roberts@mail.com', 'password123', 170, 1),
-(11, 'Kevin Hart', '09174252643', 'kevin.hart@mail.com', 'password123', 130, 1),
+(11, 'Kevin Hart', '09174252643', 'kevin.hart@mail.com', 'password123', 150, 1),
 (12, 'Laura Dern', '09179814377', 'laura.dern@mail.com', 'password123', 130, 1),
 (13, 'Michael Scott', '09176078008', 'michael.scott@mail.com', 'password123', 70, 1),
 (14, 'Nina Simone', '09179691422', 'nina.simone@mail.com', 'password123', 120, 1),
@@ -162,7 +158,8 @@ INSERT INTO `customers` (`cust_id`, `username`, `cust_phone`, `cust_email`, `cus
 (47, 'Ursula', '09178085920', 'ursula@mail.com', 'password123', 120, 1),
 (48, 'Voldemort', '09173189220', 'voldemort@mail.com', 'password123', 180, 1),
 (49, 'Wade Wilson', '09176456465', 'wade.wilson@mail.com', 'password123', 70, 1),
-(50, 'Xena', '09171724029', 'xena@mail.com', 'password123', 180, 1);
+(50, 'Xena', '09171724029', 'xena@mail.com', 'password123', 180, 1),
+(101, 'walkin', '00000000000', 'walkin@pos.local', 'n/a', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -232,35 +229,37 @@ CREATE TABLE `orders` (
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`order_id`, `cust_id`, `voucher_id`, `order_mode`, `order_status`, `order_price`, `order_discount`, `pts_used`, `order_qr`, `order_date`) VALUES
-(1, 1, 1, 'ol', 'pay', 90.00, 0.00, 0, NULL, '2026-05-01 09:14:22'),
-(2, 2, 2, 'ol', 'done', 100.00, 0.00, 0, NULL, '2026-05-02 14:35:10'),
-(3, 3, 3, 'ol', 'claim', 95.00, 0.00, 0, NULL, '2026-05-03 11:02:55'),
-(4, 4, 4, 'ol', 'done', 120.00, 0.00, 0, NULL, '2026-05-04 18:22:41'),
-(5, 5, 5, 'ol', 'pay', 110.00, 0.00, 0, NULL, '2026-05-05 10:45:19'),
-(6, 6, 1, 'ol', 'done', 130.00, 0.00, 0, NULL, '2026-05-06 15:09:33'),
-(7, 7, 2, 'ol', 'pay', 140.00, 0.00, 0, NULL, '2026-05-08 12:30:02'),
-(8, 8, 3, 'ol', 'done', 150.00, 0.00, 0, NULL, '2026-05-09 16:55:48'),
-(9, 9, 4, 'ol', 'claim', 160.00, 0.00, 0, NULL, '2026-05-10 08:19:12'),
-(10, 10, 5, 'ol', 'done', 170.00, 0.00, 0, NULL, '2026-05-11 20:11:37'),
-(11, 11, 1, 'ol', 'pay', 180.00, 0.00, 0, NULL, '2026-05-12 11:40:26'),
-(12, 12, 2, 'ol', 'done', 190.00, 0.00, 0, NULL, '2026-05-13 14:04:15'),
-(13, 13, 3, 'ol', 'claim', 200.00, 0.00, 0, NULL, '2026-05-13 19:28:50'),
-(14, 14, 4, 'ol', 'done', 210.00, 0.00, 0, NULL, '2026-05-14 10:51:03'),
-(15, 15, 5, 'ol', 'claim', 220.00, 0.00, 0, NULL, '2026-05-15 13:14:59'),
-(16, 16, 1, 'ol', 'done', 230.00, 0.00, 0, NULL, '2026-05-15 17:42:11'),
-(17, 17, 2, 'ol', 'done', 240.00, 0.00, 0, NULL, '2026-05-16 09:05:24'),
-(18, 18, 3, 'ol', 'done', 250.00, 0.00, 0, NULL, '2026-05-16 15:23:08'),
-(19, 19, 4, 'ol', 'done', 260.00, 0.00, 0, NULL, '2026-05-17 11:58:44'),
-(20, 20, 5, 'ol', 'done', 270.00, 0.00, 0, NULL, '2026-05-17 21:02:19'),
-(22, 23, NULL, 'ol', 'done', 90.00, 0.00, 0, 'ORD-22', '2026-05-18 00:48:38'),
-(23, 23, NULL, 'ol', 'done', 90.00, 0.00, 0, 'ORD-23', '2026-05-18 01:32:58'),
-(24, 23, NULL, 'ol', 'void', 0.00, 0.00, 100, 'ORD-24', '2026-05-18 01:34:11'),
-(25, 99, NULL, 'pos', 'done', 85.50, 9.50, 0, 'ORD-00025', '2026-05-23 09:32:55'),
-(26, 1, NULL, 'ol', 'void', 100.00, 0.00, 0, 'ORD-26', '2026-05-23 09:35:32'),
-(27, 1, NULL, 'ol', 'done', 100.00, 0.00, 0, 'ORD-27', '2026-05-23 10:30:40'),
-(28, 100, 1, 'ol', 'done', 92.00, 0.00, 0, 'ORD-28', '2026-05-23 18:34:23'),
-(29, 100, NULL, 'ol', 'done', 100.00, 0.00, 0, 'ORD-29', '2026-05-23 18:45:13');
+INSERT INTO `orders` (`order_id`, `cust_id`, `walkin_name`, `voucher_id`, `order_mode`, `order_status`, `order_price`, `order_discount`, `pts_used`, `order_qr`, `order_date`) VALUES
+(1, 1, NULL, 1, 'ol', 'pay', 90.00, 0.00, 0, 'ORD-1', '2026-05-01 09:14:22'),
+(2, 2, NULL, 2, 'ol', 'done', 100.00, 0.00, 0, 'ORD-2', '2026-05-02 14:35:10'),
+(3, 3, NULL, 3, 'ol', 'claim', 95.00, 0.00, 0, 'ORD-3', '2026-05-03 11:02:55'),
+(4, 4, NULL, 4, 'ol', 'done', 120.00, 0.00, 0, 'ORD-4', '2026-05-04 18:22:41'),
+(5, 5, NULL, 5, 'ol', 'pay', 110.00, 0.00, 0, 'ORD-5', '2026-05-05 10:45:19'),
+(6, 6, NULL, 1, 'ol', 'done', 130.00, 0.00, 0, 'ORD-6', '2026-05-06 15:09:33'),
+(7, 7, NULL, 2, 'ol', 'pay', 140.00, 0.00, 0, 'ORD-7', '2026-05-08 12:30:02'),
+(8, 8, NULL, 3, 'ol', 'done', 150.00, 0.00, 0, 'ORD-8', '2026-05-09 16:55:48'),
+(9, 9, NULL, 4, 'ol', 'claim', 160.00, 0.00, 0, 'ORD-9', '2026-05-10 08:19:12'),
+(10, 10, NULL, 5, 'ol', 'done', 170.00, 0.00, 0, 'ORD-10', '2026-05-11 20:11:37'),
+(11, 11, NULL, 1, 'ol', 'pay', 180.00, 0.00, 0, 'ORD-11', '2026-05-12 11:40:26'),
+(12, 12, NULL, 2, 'ol', 'done', 190.00, 0.00, 0, 'ORD-12', '2026-05-13 14:04:15'),
+(13, 13, NULL, 3, 'ol', 'claim', 200.00, 0.00, 0, 'ORD-13', '2026-05-13 19:28:50'),
+(14, 14, NULL, 4, 'ol', 'done', 210.00, 0.00, 0, 'ORD-14', '2026-05-14 10:51:03'),
+(15, 15, NULL, 5, 'ol', 'done', 220.00, 0.00, 0, 'ORD-15', '2026-05-15 13:14:59'),
+(16, 16, NULL, 1, 'ol', 'done', 230.00, 0.00, 0, 'ORD-16', '2026-05-15 17:42:11'),
+(17, 17, NULL, 2, 'ol', 'done', 240.00, 0.00, 0, 'ORD-17', '2026-05-16 09:05:24'),
+(18, 18, NULL, 3, 'ol', 'done', 250.00, 0.00, 0, 'ORD-18', '2026-05-16 15:23:08'),
+(19, 19, NULL, 4, 'ol', 'done', 260.00, 0.00, 0, 'ORD-19', '2026-05-17 11:58:44'),
+(20, 20, NULL, 5, 'ol', 'done', 270.00, 0.00, 0, 'ORD-20', '2026-05-17 21:02:19'),
+(22, 23, NULL, NULL, 'ol', 'done', 90.00, 0.00, 0, 'ORD-22', '2026-05-18 00:48:38'),
+(23, 23, NULL, NULL, 'ol', 'done', 90.00, 0.00, 0, 'ORD-23', '2026-05-18 01:32:58'),
+(24, 23, NULL, NULL, 'ol', 'void', 0.00, 0.00, 100, 'ORD-24', '2026-05-18 01:34:11'),
+(25, 99, NULL, NULL, 'pos', 'done', 85.50, 9.50, 0, 'ORD-25', '2026-05-23 09:32:55'),
+(26, 1, NULL, NULL, 'ol', 'void', 100.00, 0.00, 0, 'ORD-26', '2026-05-23 09:35:32'),
+(27, 1, NULL, NULL, 'ol', 'done', 100.00, 0.00, 0, 'ORD-27', '2026-05-23 10:30:40'),
+(28, 100, NULL, 1, 'ol', 'done', 92.00, 0.00, 0, 'ORD-28', '2026-05-23 18:34:23'),
+(29, 100, NULL, NULL, 'ol', 'done', 100.00, 0.00, 0, 'ORD-29', '2026-05-23 18:45:13'),
+(30, 11, NULL, NULL, 'ol', 'done', 90.00, 0.00, 0, 'ORD-30', '2026-05-26 16:12:08'),
+(31, 11, NULL, NULL, 'ol', 'claim', 90.00, 0.00, 0, 'ORD-31', '2026-05-26 16:44:31');
 
 -- --------------------------------------------------------
 
@@ -310,7 +309,9 @@ INSERT INTO `order_items` (`order_id`, `prodvar_id`, `addon_id`, `item_price`, `
 (26, 2, NULL, 100.00, 1, 'Normal', '100%'),
 (27, 3, NULL, 100.00, 1, 'Normal', '100%'),
 (28, 13, NULL, 115.00, 1, 'Normal', '75%'),
-(29, 3, NULL, 100.00, 1, 'Normal', '100%');
+(29, 3, NULL, 100.00, 1, 'Normal', '100%'),
+(30, 1, NULL, 90.00, 1, 'Normal', '100%'),
+(31, 1, NULL, 90.00, 1, 'Normal', '100%');
 
 -- --------------------------------------------------------
 
@@ -325,42 +326,44 @@ CREATE TABLE `payment` (
   `amt_due` decimal(10,2) NOT NULL DEFAULT 0.00,
   `amt_paid` decimal(10,2) NOT NULL DEFAULT 0.00,
   `amt_change` decimal(10,2) NOT NULL DEFAULT 0.00,
-  `payment_date` datetime DEFAULT current_timestamp()
+  `payment_date` datetime DEFAULT current_timestamp(),
+  `payment_refunded` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `payment`
 --
 
-INSERT INTO `payment` (`payment_ref`, `order_id`, `emp_id`, `amt_due`, `amt_paid`, `amt_change`, `payment_date`) VALUES
-(1, 1, 1, 90.00, 100.00, 10.00, '2026-05-23 01:23:46'),
-(2, 2, 2, 100.00, 100.00, 0.00, '2026-05-23 01:23:46'),
-(3, 3, 3, 95.00, 100.00, 5.00, '2026-05-23 01:23:46'),
-(4, 4, 4, 120.00, 150.00, 30.00, '2026-05-23 01:23:46'),
-(5, 5, 5, 110.00, 110.00, 0.00, '2026-05-23 01:23:46'),
-(6, 6, 1, 130.00, 150.00, 20.00, '2026-05-23 01:23:46'),
-(7, 7, 2, 140.00, 200.00, 60.00, '2026-05-23 01:23:46'),
-(8, 8, 3, 150.00, 150.00, 0.00, '2026-05-23 01:23:46'),
-(9, 9, 4, 160.00, 200.00, 40.00, '2026-05-23 01:23:46'),
-(10, 10, 5, 170.00, 200.00, 30.00, '2026-05-23 01:23:46'),
-(11, 11, 1, 180.00, 200.00, 20.00, '2026-05-23 01:23:46'),
-(12, 12, 2, 190.00, 200.00, 10.00, '2026-05-23 01:23:46'),
-(13, 13, 3, 200.00, 200.00, 0.00, '2026-05-23 01:23:46'),
-(14, 14, 4, 210.00, 250.00, 40.00, '2026-05-23 01:23:46'),
-(15, 15, 5, 220.00, 300.00, 80.00, '2026-05-23 01:23:46'),
-(16, 16, 1, 230.00, 250.00, 20.00, '2026-05-23 01:23:46'),
-(17, 17, 2, 240.00, 300.00, 60.00, '2026-05-23 01:23:46'),
-(18, 18, 3, 250.00, 250.00, 0.00, '2026-05-23 01:23:46'),
-(19, 19, 4, 260.00, 300.00, 40.00, '2026-05-23 01:23:46'),
-(20, 20, 5, 270.00, 300.00, 30.00, '2026-05-23 01:23:46'),
-(22, 22, 1, 90.00, 90.00, 0.00, '2026-05-23 01:23:46'),
-(23, 23, 1, 90.00, 90.00, 0.00, '2026-05-23 01:23:46'),
-(24, 25, 1, 85.50, 90.00, 4.50, '2026-05-23 09:32:55'),
-(25, 26, 1, 100.00, 100.00, 0.00, '2026-05-23 09:36:48'),
-(26, 24, 1, 0.00, 0.00, 0.00, '2026-05-23 09:39:43'),
-(27, 27, 1, 100.00, 100.00, 0.00, '2026-05-23 16:22:53'),
-(28, 28, 1, 92.00, 92.00, 0.00, '2026-05-23 18:36:30'),
-(29, 29, 1, 100.00, 100.00, 0.00, '2026-05-23 18:48:51');
+INSERT INTO `payment` (`payment_ref`, `order_id`, `emp_id`, `amt_due`, `amt_paid`, `amt_change`, `payment_date`, `payment_refunded`) VALUES
+(1, 1, 1, 90.00, 100.00, 10.00, '2026-05-23 01:23:46', 0),
+(2, 2, 2, 100.00, 100.00, 0.00, '2026-05-23 01:23:46', 0),
+(3, 3, 3, 95.00, 100.00, 5.00, '2026-05-23 01:23:46', 0),
+(4, 4, 4, 120.00, 150.00, 30.00, '2026-05-23 01:23:46', 0),
+(5, 5, 5, 110.00, 110.00, 0.00, '2026-05-23 01:23:46', 0),
+(6, 6, 1, 130.00, 150.00, 20.00, '2026-05-23 01:23:46', 0),
+(7, 7, 2, 140.00, 200.00, 60.00, '2026-05-23 01:23:46', 0),
+(8, 8, 3, 150.00, 150.00, 0.00, '2026-05-23 01:23:46', 0),
+(9, 9, 4, 160.00, 200.00, 40.00, '2026-05-23 01:23:46', 0),
+(10, 10, 5, 170.00, 200.00, 30.00, '2026-05-23 01:23:46', 0),
+(11, 11, 1, 180.00, 200.00, 20.00, '2026-05-23 01:23:46', 0),
+(12, 12, 2, 190.00, 200.00, 10.00, '2026-05-23 01:23:46', 0),
+(13, 13, 3, 200.00, 200.00, 0.00, '2026-05-23 01:23:46', 0),
+(14, 14, 4, 210.00, 250.00, 40.00, '2026-05-23 01:23:46', 0),
+(15, 15, 5, 220.00, 220.00, 0.00, '2026-05-23 01:23:46', 0),
+(16, 16, 1, 230.00, 250.00, 20.00, '2026-05-23 01:23:46', 0),
+(17, 17, 2, 240.00, 300.00, 60.00, '2026-05-23 01:23:46', 0),
+(18, 18, 3, 250.00, 250.00, 0.00, '2026-05-23 01:23:46', 0),
+(19, 19, 4, 260.00, 300.00, 40.00, '2026-05-23 01:23:46', 0),
+(20, 20, 5, 270.00, 300.00, 30.00, '2026-05-23 01:23:46', 0),
+(22, 22, 1, 90.00, 90.00, 0.00, '2026-05-23 01:23:46', 0),
+(23, 23, 1, 90.00, 90.00, 0.00, '2026-05-23 01:23:46', 0),
+(24, 25, 1, 85.50, 90.00, 4.50, '2026-05-23 09:32:55', 0),
+(25, 26, 1, 100.00, 100.00, 0.00, '2026-05-23 09:36:48', 0),
+(26, 24, 1, 0.00, 0.00, 0.00, '2026-05-23 09:39:43', 0),
+(27, 27, 1, 100.00, 100.00, 0.00, '2026-05-23 16:22:53', 0),
+(28, 28, 1, 92.00, 92.00, 0.00, '2026-05-23 18:36:30', 0),
+(29, 29, 1, 100.00, 100.00, 0.00, '2026-05-23 18:48:51', 0),
+(30, 30, 1, 90.00, 90.00, 0.00, '2026-05-26 16:12:58', 0);
 
 -- --------------------------------------------------------
 
@@ -386,13 +389,33 @@ INSERT INTO `product` (`product_id`, `prod_name`, `prod_categ`, `prod_qty`, `uni
 (2, 'Okinawa Milk Tea', 'Regular', 50, 100.00, 1),
 (3, 'Taro Milk Tea', 'Regular', 50, 95.00, 1),
 (4, 'Wintermelon Milk Tea', 'Salty Cheese', 49, 95.00, 1),
-(5, 'Matcha Milk Tea', 'Premium', 50, 110.00, 1),
+(5, 'Matcha Milk Tea', 'Premium', 49, 110.00, 1),
 (6, 'Strawberry Fruit Tea', 'Fruit Series', 50, 120.00, 1),
 (7, 'Mango Fruit Tea', 'Fruit Series', 50, 120.00, 1),
 (8, 'Red Velvet Fruit Tea', 'Fruit Series', 50, 110.00, 1),
 (9, 'Green Apple Fruit Tea', 'Fruit Series', 50, 95.00, 1),
 (10, 'Wintermelon Fruit Tea', 'Fruit Series', 50, 100.00, 1),
-(11, 'Black Forest Pearl Shake', 'Pearl Shake', 50, 80.00, 1);
+(11, 'Black Forest Pearl Shake', 'Pearl Shake', 50, 80.00, 1),
+(13, 'Roasted Almond Cheesecake', '16', 0, 95.00, 1),
+(14, 'Caramelized Cheesecake', '16', 0, 100.00, 1),
+(15, 'Chocobutter Cheesecake', '16', 0, 100.00, 1),
+(16, 'Strawberry Cheesecake', '16', 0, 100.00, 1),
+(17, 'Oreo Cheesecake', '16', 0, 90.00, 1),
+(18, 'Red Velvet Cheesecake', '16', 0, 90.00, 1),
+(19, 'Tiramisu Cheesecake', '16', 0, 100.00, 1),
+(20, 'Choconutella Cheesecake', '16', 0, 110.00, 1),
+(21, 'Classic Cheesecake', '16', 0, 80.00, 1),
+(22, 'Black Forest Cream Cheese', '17', 0, 110.00, 1),
+(23, 'Butter Overload Cream Cheese', '17', 0, 95.00, 1),
+(24, 'Choco Mousse Cream Cheese', '17', 0, 105.00, 1),
+(25, 'Danish Choco Cream Cheese', '17', 0, 110.00, 1),
+(26, 'Choco Strawberry Cream Cheese', '16', 0, 110.00, 1),
+(27, 'Pure Lemonade', '18', 0, 50.00, 1),
+(28, 'Honey Lemonade', '18', 0, 60.00, 1),
+(29, 'Chocolate Pearl Shake', '15', 0, 65.00, 1),
+(30, 'Cookies and Cream Pearl Shake', '15', 0, 70.00, 1),
+(31, 'Dark Choco Cookies Pearl Shake', '15', 0, 75.00, 1),
+(32, 'Strawberry Pearl Shake', '15', 0, 65.00, 1);
 
 -- --------------------------------------------------------
 
@@ -433,7 +456,47 @@ INSERT INTO `product_var` (`prodvar_id`, `product_id`, `var_size`, `var_markup`,
 (18, 8, 'Large', 15.00, 'images/8.png'),
 (19, 9, 'Large', 15.00, 'images/9.png'),
 (20, 10, 'Large', 15.00, 'images/10.png'),
-(36, 11, 'Regular', 0.00, 'images/products/prod_1779523747_90a48f17.png');
+(36, 11, 'Regular', 0.00, 'images/products/prod_1779523747_90a48f17.png'),
+(39, 13, 'Regular', 0.00, 'images/uploads/prod_1779783351_6715a19e.png'),
+(40, 13, 'Large', 20.00, 'images/uploads/prod_1779783351_6715a19e.png'),
+(41, 14, 'Regular', 0.00, 'images/uploads/prod_1779783447_d51197ba.png'),
+(42, 14, 'Large', 20.00, 'images/uploads/prod_1779783447_d51197ba.png'),
+(43, 15, 'Regular', 0.00, 'images/uploads/prod_1779783506_e4219155.png'),
+(44, 15, 'Large', 20.00, 'images/uploads/prod_1779783506_e4219155.png'),
+(45, 16, 'Regular', 0.00, 'images/uploads/prod_1779783562_9fa2422c.png'),
+(46, 16, 'Large', 15.00, 'images/uploads/prod_1779783562_9fa2422c.png'),
+(47, 17, 'Regular', 0.00, 'images/uploads/prod_1779783593_53cf2796.png'),
+(48, 17, 'Large', 20.00, 'images/uploads/prod_1779783593_53cf2796.png'),
+(49, 18, 'Regular', 0.00, 'images/uploads/prod_1779783612_80bfce1a.png'),
+(50, 18, 'Large', 20.00, 'images/uploads/prod_1779783612_80bfce1a.png'),
+(51, 19, 'Regular', 0.00, 'images/uploads/prod_1779783654_debffd5e.png'),
+(52, 19, 'Large', 20.00, 'images/uploads/prod_1779783654_debffd5e.png'),
+(53, 20, 'Regular', 0.00, 'images/uploads/prod_1779783673_e354bd0c.png'),
+(54, 20, 'Large', 20.00, 'images/uploads/prod_1779783673_e354bd0c.png'),
+(55, 21, 'Regular', 0.00, 'images/uploads/prod_1779783706_8dbf34ad.png'),
+(56, 21, 'Large', 15.00, 'images/uploads/prod_1779783706_8dbf34ad.png'),
+(57, 22, 'Regular', 0.00, 'images/uploads/prod_1779783828_8ffe0979.png'),
+(58, 22, 'Large', 15.00, 'images/uploads/prod_1779783828_8ffe0979.png'),
+(59, 23, 'Regular', 0.00, 'images/uploads/prod_1779783859_7662b4dc.png'),
+(60, 23, 'Large', 15.00, 'images/uploads/prod_1779783859_7662b4dc.png'),
+(61, 24, 'Regular', 0.00, 'images/uploads/prod_1779783899_8e649348.png'),
+(62, 24, 'Large', 15.00, 'images/uploads/prod_1779783899_8e649348.png'),
+(63, 25, 'Regular', 0.00, 'images/uploads/prod_1779783948_0be6eaa0.png'),
+(64, 25, 'Large', 20.00, 'images/uploads/prod_1779783948_0be6eaa0.png'),
+(65, 26, 'Regular', 0.00, 'images/uploads/prod_1779783983_5fe19ce6.png'),
+(66, 26, 'Large', 15.00, 'images/uploads/prod_1779783983_5fe19ce6.png'),
+(67, 27, 'Regular', 0.00, 'images/uploads/prod_1779784088_d099a93b.png'),
+(68, 27, 'Large', 10.00, 'images/uploads/prod_1779784088_d099a93b.png'),
+(69, 28, 'Regular', 0.00, 'images/uploads/prod_1779784103_2d6684be.png'),
+(70, 28, 'Large', 10.00, 'images/uploads/prod_1779784103_2d6684be.png'),
+(71, 29, 'Regular', 0.00, 'images/uploads/prod_1779784238_39a99908.png'),
+(72, 29, 'Large', 10.00, 'images/uploads/prod_1779784238_39a99908.png'),
+(73, 30, 'Regular', 0.00, 'images/uploads/prod_1779784298_b3dfe0bf.png'),
+(74, 30, 'Large', 10.00, 'images/uploads/prod_1779784298_b3dfe0bf.png'),
+(75, 31, 'Regular', 0.00, 'images/uploads/prod_1779784331_9e079578.png'),
+(76, 31, 'Large', 10.00, 'images/uploads/prod_1779784331_9e079578.png'),
+(77, 32, 'Regular', 0.00, 'images/uploads/prod_1779784364_945f7ff7.png'),
+(78, 32, 'Large', 10.00, 'images/uploads/prod_1779784364_945f7ff7.png');
 
 -- --------------------------------------------------------
 
@@ -608,43 +671,43 @@ ALTER TABLE `addon`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `categ_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `categ_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `cust_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+  MODIFY `cust_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
 --
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `emp_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `emp_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `order_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `payment_ref` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `payment_ref` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `product_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `product_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `product_var`
 --
 ALTER TABLE `product_var`
-  MODIFY `prodvar_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `prodvar_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- AUTO_INCREMENT for table `voucher`
@@ -695,5 +758,3 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
-SET FOREIGN_KEY_CHECKS = 1;

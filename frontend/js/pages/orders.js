@@ -92,15 +92,15 @@ function renderOrderCard(order, isActive) {
             </div>
 
             ${meta.ready ? `
-                <div style="font-size: 0.82rem; color: #166534; background: #f0fdf4; border: 1px dashed #bbf7d0; padding: 12px 14px; border-radius: 10px; font-weight: 600; display: flex; align-items: center; gap: 8px;">
-                    <i class="bi bi-geo-alt-fill" style="color: #10b981;"></i> Ready for pick up at <strong>${store.name}</strong> (${store.hours})
+                <div style="font-size: 0.82rem; color: #475569; background: #f8fafc; border: 1px solid #f1f5f9; padding: 12px 14px; border-radius: 10px; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+                    <i class="bi bi-geo-alt-fill" style="color: #64748b;"></i> Ready for pick up at <strong>${store.name}</strong> (${store.hours})
                 </div>
             ` : ''}
 
             <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 4px;">
                 <div>
                     <span style="font-size: 0.75rem; color: #94a3b8; text-transform: uppercase; font-weight: 700; letter-spacing: 0.05em;">TO PAY</span>
-                    <div style="font-weight: 800; font-size: 1.4rem; color: ${isActive ? xiemiBrandRed : '#0f172a'}; margin-top: -1px; letter-spacing: -0.02em;">${Utils.formatCurrency(order.total)}</div>
+                    <div style="font-weight: 800; font-size: 1.4rem; color: #0f172a; margin-top: -1px; letter-spacing: -0.02em;">${Utils.formatCurrency(order.total)}</div>
                 </div>
                 ${isActive ? `
                     <button class="btn view-qr-btn" data-id="${order.id}" data-qr="${order.order_qr || order.id}" style="font-family: 'Inter', sans-serif; background: #0f172a; color: white; border: none; padding: 10px 20px; font-size: 0.82rem;  border-radius: 10px; display: inline-flex; align-items: center; gap: 8px; cursor: pointer; transition: all 0.15s ease; box-shadow: 0 4px 12px rgba(15,23,42,0.06);"

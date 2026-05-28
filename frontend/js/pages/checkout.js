@@ -42,7 +42,7 @@ async function CheckoutPage() {
             <div class="checkout-line"><span>Subtotal</span><span>${Utils.formatCurrency(subtotal)}</span></div>
             ${appliedVoucher ? `<div class="checkout-line checkout-line-discount"><span>Voucher (${appliedVoucher.code})</span><span>-${Utils.formatCurrency(appliedVoucher.type === 'percentage' ? subtotal * (appliedVoucher.discount / 100) : appliedVoucher.discount)}</span></div>` : ''}
             ${usePoints ? `<div class="checkout-line checkout-line-discount"><span>Points (100 pts)</span><span>-${Utils.formatCurrency(POINTS_DISCOUNT)}</span></div>` : ''}
-            <div class="checkout-line"><span>Pickup</span><span>Free</span></div>
+            <div class="checkout-line"><span>Delivery</span><span>Pickup</span></div>
             <hr class="checkout-divider">
             <div class="checkout-line checkout-line-total"><span>Total</span><span>${Utils.formatCurrency(total)}</span></div>
         `;
@@ -137,7 +137,7 @@ async function CheckoutPage() {
             .checkout-line { display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 8px; color: #475569; }
             .checkout-line-discount { color: #166534; }
             .checkout-line-total { font-weight: 600; color: #1e293b; font-size: 1rem; }
-            .checkout-line-total span:last-child { color: var(--color-primary); }
+            .checkout-line-total span:last-child { color: #1e293b; }
             .checkout-divider { border: none; border-top: 1px solid var(--color-border); margin: 12px 0; }
             .checkout-item { display: flex; gap: 12px; padding-bottom: 14px; margin-bottom: 14px; border-bottom: 1px solid var(--color-border); }
             .checkout-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }

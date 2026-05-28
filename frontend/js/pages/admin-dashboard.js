@@ -13,10 +13,7 @@ async function AdminDashboardPage() {
         let allOrders = [];
         try {
             const ordersRes = await API.get('/admin/orders.php');
-            allOrders = (ordersRes.data || []).map(o => ({
-                ...o,
-                id: 'ORD-' + o.db_id.toString().padStart(4, '0')
-            }));
+            allOrders = (ordersRes.data || []);
         } catch (e) { console.error('Failed to load orders', e); }
 
         // Compute filtered total sales from completed orders

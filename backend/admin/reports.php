@@ -209,14 +209,15 @@ try {
     }
 
     $catSql = "
-        SELECT p.prod_categ, SUM(oi.item_qty) as total_qty, SUM(oi.item_price * oi.item_qty) as total_sales
+        SELECT COALESCE(c.categ_name, p.prod_categ) as prod_categ, SUM(oi.item_qty) as total_qty, SUM(oi.item_price * oi.item_qty) as total_sales
         FROM order_items oi
         JOIN product_var pv ON oi.prodvar_id = pv.prodvar_id
         JOIN product p ON pv.product_id = p.product_id
+        LEFT JOIN category c ON (p.prod_categ = CAST(c.categ_id AS CHAR) OR p.prod_categ = c.categ_name)
         JOIN orders o ON oi.order_id = o.order_id
         WHERE $baseWhere
         $dateFilter
-        GROUP BY p.prod_categ
+        GROUP BY COALESCE(c.categ_name, p.prod_categ)
         ORDER BY total_qty DESC
         LIMIT 10
     ";

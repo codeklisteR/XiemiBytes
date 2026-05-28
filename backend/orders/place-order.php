@@ -153,7 +153,7 @@ try {
         throw new Exception("Order saved but order_id not returned.");
     }
 
-    // Save order QR code
+    // Save order QR code (consistent ORD-{id} format, no zero-padding)
     $order_qr = "ORD-" . $order_id;
     $updateQrStmt = $pdo->prepare("UPDATE orders SET order_qr = :qr WHERE order_id = :id");
     $updateQrStmt->execute([":qr" => $order_qr, ":id" => $order_id]);

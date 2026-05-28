@@ -91,7 +91,7 @@ try {
 
     $order_id = $pdo->lastInsertId();
 
-    $order_qr = "ORD-" . str_pad($order_id, 5, '0', STR_PAD_LEFT);
+    $order_qr = "ORD-" . $order_id;
     $updateQrStmt = $pdo->prepare("UPDATE orders SET order_qr = :qr WHERE order_id = :id");
     $updateQrStmt->execute([":qr" => $order_qr, ":id" => $order_id]);
 

@@ -92,10 +92,11 @@ try {
                     oi.sugar_lvl as sugar_level,
                     pv.var_size as size,
                     pr.prod_name as name,
-                    pr.prod_categ as category
+                    COALESCE(c.categ_name, pr.prod_categ) as category
                 FROM order_items oi
                 LEFT JOIN product_var pv ON oi.prodvar_id = pv.prodvar_id
                 LEFT JOIN product pr ON pv.product_id = pr.product_id
+                LEFT JOIN category c ON (pr.prod_categ = CAST(c.categ_id AS CHAR) OR pr.prod_categ = c.categ_name)
                 WHERE oi.order_id = ?
             ");
             $itemStmt->execute([$row['order_id']]);
@@ -145,7 +146,7 @@ try {
             ];
 
             $orders[] = [
-                'id' => $row['order_qr'] ?: ('ORD-' . str_pad($row['order_id'], 5, '0', STR_PAD_LEFT)),
+                'id' => $row['order_qr'] ?: ('ORD-' . $row['order_id']),
                 'order_qr' => $row['order_qr'],
                 'db_id' => (int)$row['order_id'],
                 'guest_customer_name' => $guestName,

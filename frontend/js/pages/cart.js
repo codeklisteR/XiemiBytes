@@ -96,12 +96,12 @@ async function CartPage() {
                             </div>
                             <div class="d-flex justify-content-between mb-3">
                                 <span class="text-muted">Delivery</span>
-                                <span class="font-weight-regular" style="color: #16a34a;">Free (Pickup)</span>
+                                <span class="font-weight-regular" style="color: #1e293b;">Pickup</span>
                             </div>
                             <hr style="margin: 12px 0; border-color: #e2e8f0;">
                             <div class="d-flex justify-content-between mb-4">
                                 <span class="font-weight-bold" style="font-size: 1.1rem;">Total</span>
-                                <span class="font-weight-bold" style="font-size: 1.3rem; color: var(--color-primary);">${Utils.formatCurrency(subtotal)}</span>
+                                <span class="font-weight-bold" style="font-size: 1.3rem; color: #1e293b;">${Utils.formatCurrency(subtotal)}</span>
                             </div>
 
                             <button class="btn btn-primary btn-block py-3" id="btn-checkout" style="border-radius:12px; font-size:1rem;">
